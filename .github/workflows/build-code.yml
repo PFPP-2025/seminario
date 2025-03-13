@@ -15,6 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+
     - name: Set up Go
       # uses: actions/setup-go@v5
       uses: actions/setup-go@f111f3307d8850f501ac008e886eec1fd1932a34
