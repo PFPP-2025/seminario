@@ -1,0 +1,33 @@
+name: oci-builds
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - '*'
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-upload:
+    name: Build and Upload Images
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+    
+      - name: Build image for PR
+        if: github.event_name == 'pull_request'
+        env:
+          IMG: ghcr.io/pffp-2025/seminario:pr-${{ github.event.number }}
+        shell: bash
+        run: |
+          make oci-build
+          make oci-save
+
+      - name: Upload pffp artifacts for PR
+        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
+        with:
+          name: pffp
+          path: pffp.tar
