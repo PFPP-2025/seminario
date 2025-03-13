@@ -49,6 +49,10 @@ clean:
 .PHONY: oci-build
 oci-build:
 	${CONTAINER_MANAGER} build -t $(IMG) -f oci/Containerfile .
+
+.PHONY: oci-save
+oci-save:
+	${CONTAINER_MANAGER} save -m -o pffp.tar $(IMG)
 	
 .PHONY: oci-run
 oci-run:
