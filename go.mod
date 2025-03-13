@@ -1,6 +1,6 @@
 module seminario
 
-go 1.23.7
+go 1.22.7
 
 require go.uber.org/zap v1.27.0
 
