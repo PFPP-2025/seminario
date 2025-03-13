@@ -4,12 +4,12 @@ USER root
 
 COPY . .
 
-RUN go build -buildvcs=false .
+RUN make build
 
 FROM registry.access.redhat.com/ubi9-minimal@sha256:bafd57451de2daa71ed301b277d49bd120b474ed438367f087eac0b885a668dc
 
 LABEL org.opencontainers.image.authors = "Adrian Riobo"
 
-COPY --from=builder /opt/app-root/src/seminario /usr/local/bin/
+COPY --from=builder /opt/app-root/src/out/seminario /usr/local/bin/
 
 ENTRYPOINT ["seminario"]
